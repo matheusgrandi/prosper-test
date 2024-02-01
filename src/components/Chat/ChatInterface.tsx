@@ -1,6 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ChatMessage from './ChatMessage';
 import useLLM from '../../hooks/useLLM';
+import { LinearLoader } from '../Loader/LinearLoader';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type Message = {
   sender: 'user' | 'bot';
@@ -14,7 +18,9 @@ export function ChatInterface() {
     content: '',
   });
 
-  const { fetchData } = useLLM();
+  const { fetchData, isLoading, error } = useLLM();
+
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   const handleSendMessage = () => {
     if (input.content.trim() !== '') {
@@ -29,11 +35,28 @@ export function ChatInterface() {
     }
   };
 
-  useEffect(() => {}, [messages]);
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop =
+        chatContainerRef.current.scrollHeight;
+    }
+  }, [messages]);
+
+  useEffect(() => {
+    if (error) {
+      toast.error('An error occurred while sending the message.', {
+        position: 'top-right',
+        pauseOnHover: true,
+      });
+    }
+  }, [error]);
 
   return (
     <div className='max-w-lg mx-auto'>
-      <div className='h-80 overflow-y-auto border border-gray-300 rounded-lg p-4'>
+      <div
+        className='h-80 overflow-y-auto border border-gray-300 rounded-t-lg p-4 bg-white'
+        ref={chatContainerRef}
+      >
         {messages.map((message, index) => (
           <ChatMessage
             key={index}
@@ -41,12 +64,13 @@ export function ChatInterface() {
             sender={message.sender}
           />
         ))}
+        {isLoading && <ChatMessage message={<LinearLoader />} sender='bot' />}
       </div>
-      <div className='mt-4 flex'>
+      <div className='flex rounded-b-lg border border-gray-300 items-center text-xs font-sans bg-white'>
         <input
           type='text'
-          className='w-full border border-gray-300 rounded-lg p-2'
-          placeholder='Type your message...'
+          className='w-full rounded-lg bg-transparent p-2 h-12 focus:outline-none focus:none text-black'
+          placeholder='Enter your question...'
           value={input.content}
           onChange={(e) => setInput({ ...input, content: e.target.value })}
           onKeyDown={(e) => {
@@ -56,12 +80,13 @@ export function ChatInterface() {
           }}
         />
         <button
-          className='ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg'
+          className='m-2 bg-blue-800 text-white rounded-full focus:none'
           onClick={handleSendMessage}
         >
           Send
         </button>
       </div>
+      <ToastContainer />
     </div>
   );
 }
