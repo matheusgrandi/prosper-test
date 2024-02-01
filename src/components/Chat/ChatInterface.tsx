@@ -6,12 +6,16 @@ import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+type ChatInterfaceProps = {
+  handlePageChange: (pageIndex: number) => void;
+};
+
 type Message = {
   sender: 'user' | 'bot';
   content: string;
 };
 
-export function ChatInterface() {
+export function ChatInterface({ handlePageChange }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<Message>({
     sender: 'user',
@@ -86,6 +90,7 @@ export function ChatInterface() {
           Send
         </button>
       </div>
+      <button onClick={() => handlePageChange(30)}>Go to page 30</button>
       <ToastContainer />
     </div>
   );
