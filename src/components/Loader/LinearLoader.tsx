@@ -1,5 +1,5 @@
 export function LinearLoader() {
-  const circleCommonClasses = 'h-1.5 w-1.5 bg-violet-900 rounded-full';
+  const circleCommonClasses = 'h-1 w-1 bg-black rounded-full';
   return (
     <div className='flex'>
       <div className={`${circleCommonClasses} mr-1 animate-bounce`}></div>
