@@ -3,7 +3,7 @@ import { PdfViewer } from './components/PdfViewer/PdfViewer';
 
 function App() {
   return (
-    <div className='flex flex-col-reverse md:flex-row h-max w-screen'>
+    <div className='flex flex-col-reverse md:flex-row h-screen w-screen overflow-auto'>
       <PdfViewer pdfUrl='https://prosper-assist-llm.s3.amazonaws.com/corpus_documents/policy_documents/hiscox_gl.pdf' />
       <ChatInterface />
     </div>

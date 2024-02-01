@@ -13,9 +13,9 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, sender }) => {
       <div
         className={`${
           sender === 'user'
-            ? 'bg-blue-700 rounded-tl-lg text-white'
-            : 'bg-blue-100 rounded-tr-lg text-black'
-        } rounded-lg p-2 inline-block my-1 mx-2 font-sans text-xs max-w-xs`}
+            ? 'bg-blue-700 text-white'
+            : 'bg-blue-100 text-black'
+        } rounded-lg p-2 inline-block my-1 mx-2 font-sans text-sm max-w-xs`}
       >
         {message}
       </div>
