@@ -7,7 +7,6 @@ function App() {
 
   const handlePageChange = (pageIndex: number) => {
     setPageIndex(pageIndex);
-    alert('Page changed to ' + pageIndex);
   };
 
   return (
