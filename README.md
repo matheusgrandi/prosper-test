@@ -53,8 +53,8 @@ To run the the project locally, follow these steps:
 ## Difficulties
 
 This project was very interesting to work with, since it goes over around a different needs.
-For me the most challenge part was customizing the pdf-viewer. The documentation is very poor and there's not a lot of thing on internet to check how it works. I could handle that reading the github forum of this project and also reading the methods that were being called in order to style it.
-Another point is that the API was very unstable, not working some times.
+For me the most challenge part was customizing the pdf-viewer. The documentation is very poor and there's not a lot of things on internet to check how it works. I could handle that reading the github forum of this project and also reading the methods and classes that were being called in order to style it.
+Another point is that the API was very unstable, not working some times, so I had to mock it in order to keep up without interruptions
 
 ## Useful references
 
