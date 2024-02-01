@@ -52,9 +52,9 @@ export function ChatInterface() {
   }, [error]);
 
   return (
-    <div className='max-w-lg mx-auto p-10'>
+    <div className='flex flex-col w-full h-screen rounded-lg p-10'>
       <div
-        className='h-80  border border-gray-300 rounded-t-lg p-4 bg-white overflow-y-auto'
+        className='h-full min-h-96 border border-gray-300 rounded-t-lg p-4 bg-white overflow-y-auto'
         ref={chatContainerRef}
       >
         {messages.map((message, index) => (
@@ -66,10 +66,10 @@ export function ChatInterface() {
         ))}
         {isLoading && <ChatMessage message={<LinearLoader />} sender='bot' />}
       </div>
-      <div className='flex rounded-b-lg border border-gray-300 items-center text-xs font-sans bg-white'>
+      <div className='flex rounded-b-lg border border-gray-300 items-center text-sm font-sans bg-white'>
         <input
           type='text'
-          className='w-full rounded-lg bg-transparent p-2 h-12 focus:outline-none focus:none text-black'
+          className='w-full rounded-lg bg-transparent p-4 h-12 focus:outline-none focus:none text-black'
           placeholder='Enter your question...'
           value={input.content}
           onChange={(e) => setInput({ ...input, content: e.target.value })}

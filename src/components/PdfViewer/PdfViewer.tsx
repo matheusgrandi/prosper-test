@@ -31,7 +31,7 @@ export function PdfViewer({ pdfUrl }: PdfViewerProps) {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
   return (
-    <div className='w-3/6 h-screen rounded-lg p-10'>
+    <div className='w-full h-screen rounded-lg p-10'>
       <Worker workerUrl='https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.js'>
         <Viewer fileUrl={pdfUrl} plugins={[defaultLayoutPluginInstance]} />
       </Worker>
