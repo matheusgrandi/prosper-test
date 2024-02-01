@@ -1,10 +1,15 @@
 import { useState } from 'react';
 
+export type fetchResponse = {
+  data: string;
+  reference: string;
+};
+
 export default function useLLM() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchData = async (question: string): Promise<string | void> => {
+  const fetchData = async (question: string): Promise<fetchResponse | void> => {
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -28,7 +33,7 @@ export default function useLLM() {
       const data = await response.json();
       setIsLoading(false);
       setError(null);
-      return data.message.text;
+      return { data: data.message.text, reference: data.message.citations[0] };
     } catch (error) {
       setIsLoading(false);
       setError('An error occurred while fetching data');
