@@ -1,15 +1,10 @@
-import './App.css';
 import { ChatInterface } from './components/Chat/ChatInterface';
+import { PdfViewer } from './components/PdfViewer/PdfViewer';
 
 function App() {
-  //  <iframe
-  //    src='https://prosper-assist-llm.s3.amazonaws.com/corpus_documents/policy_documents/hiscox_gl.pdf#page='
-  //    width='100%'
-  //    height='100%'
-  //    title='Hiscox GL Policy'
-  //  />;
   return (
-    <div className='flex justify-center items-center h-screen'>
+    <div className='flex flex-col-reverse md:flex-row h-max w-screen'>
+      <PdfViewer pdfUrl='https://prosper-assist-llm.s3.amazonaws.com/corpus_documents/policy_documents/hiscox_gl.pdf' />
       <ChatInterface />
     </div>
   );

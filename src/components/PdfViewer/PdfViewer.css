@@ -1,0 +1,35 @@
+@import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+
+
+
+.rpv-default-layout__container {
+  border: 2px solid white;
+  border-radius: 8px;
+}
+
+.rpv-default-layout__body {
+  background-color: white;
+  border-radius: 2px;
+}
+
+.rpv-toolbar {
+  display: flex;
+  overflow-x: auto;
+
+}
+
+.rpv-default-layout__toolbar {
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.rpv-toolbar__item, .rpv-core__minimal-button {
+  font-size: 10px;
+  padding: 0.2rem;
+ svg {
+    color: rgb(30 64 175) !important;
+    width: 0.75rem;
+    height: 0.75rem;
+ }
+}

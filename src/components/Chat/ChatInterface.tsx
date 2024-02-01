@@ -52,9 +52,9 @@ export function ChatInterface() {
   }, [error]);
 
   return (
-    <div className='max-w-lg mx-auto'>
+    <div className='max-w-lg mx-auto p-10'>
       <div
-        className='h-80 overflow-y-auto border border-gray-300 rounded-t-lg p-4 bg-white'
+        className='h-80  border border-gray-300 rounded-t-lg p-4 bg-white overflow-y-auto'
         ref={chatContainerRef}
       >
         {messages.map((message, index) => (
@@ -80,7 +80,7 @@ export function ChatInterface() {
           }}
         />
         <button
-          className='m-2 bg-blue-800 text-white rounded-full focus:none'
+          className='m-2 bg-blue-800 text-white rounded-full focus:outline-none'
           onClick={handleSendMessage}
         >
           Send
