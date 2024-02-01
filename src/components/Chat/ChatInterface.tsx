@@ -13,6 +13,7 @@ type ChatInterfaceProps = {
 type Message = {
   sender: 'user' | 'bot';
   content: string;
+  refIndex?: number;
 };
 
 export function ChatInterface({ handlePageChange }: ChatInterfaceProps) {
@@ -20,6 +21,7 @@ export function ChatInterface({ handlePageChange }: ChatInterfaceProps) {
   const [input, setInput] = useState<Message>({
     sender: 'user',
     content: '',
+    refIndex: undefined,
   });
 
   const { fetchData, isLoading, error } = useLLM();
@@ -33,7 +35,23 @@ export function ChatInterface({ handlePageChange }: ChatInterfaceProps) {
 
       fetchData(input.content).then((response) => {
         if (response === undefined) return;
-        const responseMessage: Message = { sender: 'bot', content: response };
+        let pageNumber: number | undefined;
+        if (response.reference) {
+          const pattern = /page=(\d+)/;
+          const match = response.reference.match(pattern);
+
+          if (match && match[1]) {
+            pageNumber = parseInt(match[1]);
+          }
+        }
+        const responseMessage: Message = {
+          sender: 'bot',
+          content: response.data,
+          refIndex: pageNumber || undefined,
+        };
+
+        console.log(responseMessage);
+
         setMessages((prevMessages) => [...prevMessages, responseMessage]);
       });
     }
@@ -67,6 +85,7 @@ export function ChatInterface({ handlePageChange }: ChatInterfaceProps) {
             message={message.content}
             sender={message.sender}
             handlePageChange={handlePageChange}
+            refIndex={message.refIndex || undefined}
           />
         ))}
         {isLoading && <ChatMessage message={<LinearLoader />} sender='bot' />}
