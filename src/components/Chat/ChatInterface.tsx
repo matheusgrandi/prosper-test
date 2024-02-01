@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
-import ChatMessage from './ChatMessage';
+import { ChatMessage } from './ChatMessage';
 import useLLM from '../../hooks/useLLM';
 import { LinearLoader } from '../Loader/LinearLoader';
 import { ToastContainer, toast } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 
+type ChatInterfaceProps = {
+  handlePageChange: (pageIndex: number) => void;
+};
+
 type Message = {
   sender: 'user' | 'bot';
   content: string;
 };
 
-export function ChatInterface() {
+export function ChatInterface({ handlePageChange }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<Message>({
     sender: 'user',
@@ -62,6 +66,7 @@ export function ChatInterface() {
             key={index}
             message={message.content}
             sender={message.sender}
+            handlePageChange={handlePageChange}
           />
         ))}
         {isLoading && <ChatMessage message={<LinearLoader />} sender='bot' />}
@@ -86,6 +91,7 @@ export function ChatInterface() {
           Send
         </button>
       </div>
+
       <ToastContainer />
     </div>
   );
